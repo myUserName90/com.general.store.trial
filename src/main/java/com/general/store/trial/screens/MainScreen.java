@@ -22,9 +22,9 @@ public class MainScreen extends BaseScreen {
         return this;
     }
 
-    public MainScreen tapLetsShop() {
+    public ProductsScreen tapLetsShop() {
         click(letsShopButton);
-        return this;
+        return new ProductsScreen();
     }
 
     public MainScreen selectFemaleGender() {

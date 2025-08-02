@@ -9,14 +9,17 @@
     <version>1.0</version>
 
     <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <java.version>21</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <appium.version>9.0.0</appium.version>
+        <appium.version>9.5.0</appium.version>
         <testng.version>7.9.0</testng.version>
         <log4j.version>2.20.0</log4j.version>
         <allure.version>2.25.0</allure.version>
-        <lombok.version>1.18.28</lombok.version>
+        <lombok.version>1.18.38</lombok.version>
+        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+        <maven.failsafe.plugin.version>3.1.2</maven.failsafe.plugin.version>
     </properties>
     <dependencies>
         <!-- Appium -->
@@ -56,5 +59,42 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-failsafe-plugin</artifactId>-->
+<!--                <version>${maven.failsafe.plugin.version}</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <goals>-->
+<!--                            <goal>integration-test</goal>-->
+<!--                            <goal>verify</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <forkedProcessExitTimeoutInSeconds>120</forkedProcessExitTimeoutInSeconds>-->
+<!--                            <testFailureIgnore>true</testFailureIgnore>-->
+<!--                            <reportsDirectory>${basedir}/target/allure-results/surefire-reports</reportsDirectory>-->
+<!--                            <includes>-->
+<!--                                <include>**/tests/*.java</include>-->
+<!--                            </includes>-->
+<!--                            <argLine>-->
+<!--                            </argLine>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <release>${java.version}</release>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+                <version>${maven-compiler-plugin.version}</version>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum Env {
-    EMULATOR("src/main/resources/emulator.properties"),
-    DEVICE("src/main/resources/device.properties");
+    EMULATOR("src/main/resources/env/emulator.properties"),
+    DEVICE("src/main/resources/env/device.properties");
     private final String path;
 }

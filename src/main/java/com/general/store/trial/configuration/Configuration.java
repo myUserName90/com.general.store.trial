@@ -5,7 +5,7 @@ import com.general.store.trial.enums.Env;
 import java.util.Properties;
 
 public class Configuration {
-    private static final String CONFIG_PATH = "src/main/resources/config.properties";
+    private static final String CONFIG_PATH = "src/main/resources/env/env.properties";
     private static final Properties MAIN_CONFIG = ConfigReader.readFile(CONFIG_PATH);
     private static final Properties ENVIRONMENT_PROPS;
     public static String APP;

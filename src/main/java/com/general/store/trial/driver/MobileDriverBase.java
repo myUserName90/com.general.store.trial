@@ -1,11 +1,11 @@
 package com.general.store.trial.driver;
 
 
-import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.AppiumDriver;
 
 public class MobileDriverBase {
 
-    private static final ThreadLocal<AndroidDriver> driverThread = new ThreadLocal<>();
+    private static final ThreadLocal<AppiumDriver> driverThread = new ThreadLocal<>();
 
     private MobileDriverBase() {
     }
@@ -14,7 +14,7 @@ public class MobileDriverBase {
         driverThread.set(MobileDriverFactory.getInstance().getDriverObject());
     }
 
-    public static AndroidDriver getDriver() {
+    public static AppiumDriver getDriver() {
         return driverThread.get();
     }
 

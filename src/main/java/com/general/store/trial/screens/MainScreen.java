@@ -2,7 +2,7 @@ package com.general.store.trial.screens;
 
 import org.openqa.selenium.By;
 
-import java.util.List;
+import static com.general.store.trial.driver.MobileDriverBase.getDriver;
 
 public class MainScreen extends BaseScreen {
     private final By countryDropdown = By.id("com.androidsample.generalstore:id/spinnerCountry");

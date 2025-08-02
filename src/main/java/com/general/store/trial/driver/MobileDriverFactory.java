@@ -26,7 +26,6 @@ public class MobileDriverFactory {
 
     private AndroidDriver getAndroidDriver() {
         UiAutomator2Options options = new UiAutomator2Options()
-                .setApp("C:\\Users\\Narek Melikyan\\IdeaProjects\\testProjects\\com.general.store.trial\\src\\main\\resources\\apk\\General-Store.apk")
                 .setPlatformName(Configuration.PLATFORM)
                 .setDeviceName(Configuration.DEVICE_NAME)
                 .setAutomationName(Configuration.AUTOMATOR2_SERVER)

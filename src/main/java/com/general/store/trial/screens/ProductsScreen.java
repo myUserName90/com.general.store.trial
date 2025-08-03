@@ -16,6 +16,7 @@ public class ProductsScreen extends BaseScreen {
     private final By addToCartButton = By.id("com.androidsample.generalstore:id/productAddCart");
     private final By productPrice = By.id("com.androidsample.generalstore:id/productPrice");
     private final By productTitle = By.id("com.androidsample.generalstore:id/productName");
+    private final By cartButton = By.id("com.androidsample.generalstore:id/appbar_btn_cart");
 
     public List<ProductItem> getAllProductItemsWithScroll() {
         List<ProductItem> allProducts = new ArrayList<>();
@@ -61,8 +62,45 @@ public class ProductsScreen extends BaseScreen {
             lastItemName = currentLast;
             scroll(ScrollDirection.DOWN);
         }
-
+        scrollToTop();
         return allProducts;
     }
+
+    public void clickAddToCartButtonAtIndex(int index) {
+        List<WebElement> addToCartButtons;
+        int lastSize = 0;
+
+        while (true) {
+            addToCartButtons = getElements(addToCartButton);
+
+            if (index < addToCartButtons.size()) {
+                break; // The target index is now visible
+            }
+
+            // No more buttons are loading after scroll
+            if (addToCartButtons.size() == lastSize) {
+                throw new IndexOutOfBoundsException("Add to Cart button at index " + index + " is not reachable.");
+            }
+
+            lastSize = addToCartButtons.size();
+            scroll(ScrollDirection.DOWN);
+        }
+
+        WebElement buttonToClick = addToCartButtons.get(index);
+
+        if (buttonToClick.isDisplayed()) {
+            buttonToClick.click();
+        } else {
+            throw new IllegalStateException("Add to Cart button at index " + index + " is not visible.");
+        }
+
+        scrollToTop();
+    }
+
+    public CartScreen tapCartButton() {
+        click(cartButton);
+        return new CartScreen();
+    }
+
 
 }

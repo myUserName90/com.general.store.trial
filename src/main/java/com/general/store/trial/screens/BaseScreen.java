@@ -89,7 +89,7 @@ public abstract class BaseScreen {
         getDriver().perform(Collections.singletonList(swipe));
     }
 
-    private void scrollToTop() {
+    protected void scrollToTop() {
         String previousPageSource = "";
         int unchangedCount = 0;
 

@@ -12,10 +12,10 @@ import java.util.List;
 public class ProductTests extends BaseTest {
 
     @Test
-    public void mainTest() {
+    public void testProductList() {
         ProductsScreen productsScreen = new MainScreen()
                 .selectCountry("Armenia")
-                .enterName("John Doe")
+                .enterName("My Name")
                 .selectFemaleGender()
                 .tapLetsShop();
         List<ProductItem> allProducts = productsScreen.getAllProductItemsWithScroll();

@@ -56,10 +56,10 @@ public abstract class BaseScreen {
         getElement(locator).sendKeys(input);
     }
 
-    protected boolean isDisplayed(By locator) {
+    protected boolean isDisplayed(WebElement element) {
         try {
-            log.info("Checking if element is displayed: {}", locator);
-            return getElement(locator).isDisplayed();
+            log.info("Checking if element is displayed: {}", element);
+            return element.isDisplayed();
         } catch (Exception e) {
             return false;
         }

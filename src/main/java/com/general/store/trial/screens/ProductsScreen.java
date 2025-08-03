@@ -13,8 +13,6 @@ import java.util.Set;
 
 public class ProductsScreen extends BaseScreen {
 
-    private final By productCard = By.xpath("./android.widget.RelativeLayout/android.widget.LinearLayout");
-    private final By priceCard = By.xpath("./android.widget.RelativeLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout[2]");
     private final By addToCartButton = By.id("com.androidsample.generalstore:id/productAddCart");
     private final By productPrice = By.id("com.androidsample.generalstore:id/productPrice");
     private final By productTitle = By.id("com.androidsample.generalstore:id/productName");
@@ -48,7 +46,7 @@ public class ProductsScreen extends BaseScreen {
                 } catch (NoSuchElementException ignored) {
                 }
 
-                addToCartVisibility = addToCartBtns.get(i).isDisplayed();
+                addToCartVisibility = isDisplayed(addToCartBtns.get(i));
 
                 allProducts.add(new ProductItem(name, price, addToCartVisibility));
             }

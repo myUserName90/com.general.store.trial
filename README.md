@@ -2,6 +2,9 @@
 
 This project is a **Java-based Appium automation framework** designed for testing the **General Store Android app**. The
 framework follows a modular Page Object Model (POM) architecture and is optimized for maintainability and scalability.
+Resources:
+- Test Cases: [Test Cases](src/main/resources/task/Test_Cases.pdf)
+- APK: [General Store APK](src/main/resources/task/General-Store.apk)
 
 ---
 

@@ -66,36 +66,52 @@ public class ProductsScreen extends BaseScreen {
         return allProducts;
     }
 
-    public void clickAddToCartButtonAtIndex(int index) {
-        List<WebElement> addToCartButtons;
-        int lastSize = 0;
+    public void clickAddToCartButtonsAtIndices(List<Integer> indices) {
+        Set<Integer> targetIndices = new HashSet<>(indices);
+        Set<Integer> clickedIndices = new HashSet<>();              // track which ones we already clicked
+        List<WebElement> allTrackedButtons = new ArrayList<>();     // global list of seen buttons
+
+        int lastTrackedCount = -1;
 
         while (true) {
-            addToCartButtons = getElements(addToCartButton);
-
-            if (index < addToCartButtons.size()) {
-                break; // The target index is now visible
+            List<WebElement> visibleButtons = getElements(addToCartButton);
+            // Track only new buttons
+            for (WebElement button : visibleButtons) {
+                if (!allTrackedButtons.contains(button)) {
+                    allTrackedButtons.add(button);
+                }
             }
-
-            // No more buttons are loading after scroll
-            if (addToCartButtons.size() == lastSize) {
-                throw new IndexOutOfBoundsException("Add to Cart button at index " + index + " is not reachable.");
+            // Try to click any button from targetIndices that is now visible
+            for (int i = 0; i < allTrackedButtons.size(); i++) {
+                if (targetIndices.contains(i) && !clickedIndices.contains(i)) {
+                    try {
+                        WebElement button = allTrackedButtons.get(i);
+                        if (button.isDisplayed() && button.isEnabled()) {
+                            button.click();
+                            clickedIndices.add(i);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Could not click index " + i + ": " + e.getMessage());
+                    }
+                }
             }
-
-            lastSize = addToCartButtons.size();
+            // Break if all desired indices have been clicked
+            if (clickedIndices.containsAll(targetIndices)) {
+                break;
+            }
+            // No new buttons found after scroll — stop
+            if (allTrackedButtons.size() == lastTrackedCount) {
+                System.out.println("Reached end of list. Unfound indices: " +
+                        targetIndices.stream().filter(i -> !clickedIndices.contains(i)).toList());
+                break;
+            }
+            lastTrackedCount = allTrackedButtons.size();
             scroll(ScrollDirection.DOWN);
-        }
-
-        WebElement buttonToClick = addToCartButtons.get(index);
-
-        if (buttonToClick.isDisplayed()) {
-            buttonToClick.click();
-        } else {
-            throw new IllegalStateException("Add to Cart button at index " + index + " is not visible.");
         }
 
         scrollToTop();
     }
+
 
     public CartScreen tapCartButton() {
         click(cartButton);

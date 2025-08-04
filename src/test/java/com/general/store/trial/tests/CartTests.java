@@ -33,10 +33,7 @@ public class CartTests extends BaseTest {
 
         double totalExpectedPrice = firstProductPrice + thirdProductPrice + sixthProductPrice;
 
-        productsScreen.clickAddToCartButtonAtIndex(position1);
-        productsScreen.clickAddToCartButtonAtIndex(position3);
-        productsScreen.clickAddToCartButtonAtIndex(position6);
-
+        productsScreen.clickAddToCartButtonsAtIndices(List.of(position1, position3, position6));
         CartScreen cartScreen = productsScreen.tapCartButton();
 
         List<String> productNames = cartScreen.getProductNames();
